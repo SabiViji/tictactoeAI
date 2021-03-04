@@ -11,6 +11,7 @@ int menu();
 void board();
 int legal_move(int opt,int ch);
 void play();
+int check_win();
 
 void init(){
     a[0]='1';a[1]='2';a[2]='3';a[3]='4';a[4]='5';a[5]='6';a[6]='7';a[7]='8';a[8]='9';
@@ -54,14 +55,58 @@ int legal_move(int opt,int ch){
     return ch;
 }
 void play(){
-    int chance=1,opt;
-    while(1){
-        board();
+    int chance=1,status=1,opt;
+    board();
+    while(status){
         printf("Player %d play: ",chance);
         scanf("%d",&opt);
         chance = legal_move(opt,chance);
+        board();
+        status = check_win(chance); 
     }
-}   
+}
+
+int check_win(int ch){
+    if(a[0]==a[1]&&a[1]==a[2]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[3]==a[4]&&a[4]==a[5]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[6]==a[7]&&a[7]==a[8]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[0]==a[3]&&a[3]==a[6]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[1]==a[4]&&a[4]==a[7]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[2]==a[5]&&a[5]==a[8]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[0]==a[4]&&a[4]==a[8]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[2]==a[4]&&a[4]==a[6]){
+        printf("Player %d won\n",ch-1);
+        return 0;
+    }
+    else if(a[0]!='1'&&a[1]!='2'&&a[2]!='3'&&a[3]!='4'&&a[4]!='5'&&a[5]!='6'&&a[6]!='7'&&a[7]!='8'&&a[8]!='9'){
+        printf("Draw!\n");
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
 
 void board(){
     printf("\
